@@ -91,8 +91,44 @@ This server now listens for POST requests at the /webhook endpoint. When a messa
 Step 5: Expose Your Server to the Internet
 To receive webhook calls from Twilio, your server needs to be publicly accessible. For development purposes, you can use tools like ngrok to expose your local server:
 
-Download and Run ngrok:
+# Download and Run ngrok:
+
+Step 1: Download ngrok
+Visit the ngrok Website: Go to ngrok's official website.
+
+
+- Sign Up or Log In: You need to create an account or log in if you already have one. 
+
+
+- Signing up is free and provides you access to download the software.
+- Download ngrok: Once logged in, go to the download section. 
+
+- Choose the version of ngrok that matches your operating system (Windows, macOS, or Linux).
 - open up your cli and run this command in your
+
+- Install ngrok
+```
+brew install ngrok/ngrok/ngrok
+```
+This will provide you with a public URL (e.g., https://xxxxx.ngrok.io).
+Update Twilio Webhook URL: Use this URL in your Twilio console settings for incoming messages, appending /webhook (e.g., https://xxxxx.ngrok.io/webhook).
+This setup forms the basis of your webhook service. The next steps involve integrating actual Dialogflow API calls, which will allow your service to process and respond to messages based on your Dialogflow agent's configurations.
+
+
+Step 2: Unzip and Install ngrok
+Unzip the Downloaded File:
+
+
+- For Windows: Extract the downloaded .zip file to a location where you can run it easily, such as your desktop or a dedicated directory.
+
+
+- For macOS and Linux: You can use a terminal command to unzip the file, for example
+
+```
+sudo unzip ~/Downloads/ngrok-v3-stable-darwin-amd64.zip -d /usr/local/bin
+```
+
+
 bash
 ```
 npm install dialogflow @google-cloud/dialogflow 
@@ -103,11 +139,16 @@ Cd into your twilio directory
 cd twilio-dialogflow-webhook
 ```
 
-- Install ngrok
-```
-brew install ngrok/ngrok/ngrok
-```
-This will provide you with a public URL (e.g., https://xxxxx.ngrok.io).
-Update Twilio Webhook URL: Use this URL in your Twilio console settings for incoming messages, appending /webhook (e.g., https://xxxxx.ngrok.io/webhook).
-This setup forms the basis of your webhook service. The next steps involve integrating actual Dialogflow API calls, which will allow your service to process and respond to messages based on your Dialogflow agent's configurations.
+Step 6: 
 
+To test out your server you can run this In your CLI, ensure you are in your project directory.
+```
+node server.js
+```
+- If everything is set up correctly, you should see a message in the console that says "Server is running on port 3000
+
+Test the Server:
+You can test your server by sending a POST request to http://localhost:3000/. You can use a tool like Postman, or you can use curl in a new terminal window:
+```
+curl -X POST http://localhost:3000/ -H "Content-Type: application/json" -d '{"message": "Hello, server!"}'
+```
