@@ -1,9 +1,9 @@
 ## Creating and running your server 
 
-Step 1: Environment Setup
+Step 1: Environment Setup: 
 First, you'll need to have Node.js installed on your machine. If you haven't installed Node.js yet, you can download and install it from nodejs.org.
 
- Step 2: Create a New Node.js Project
+ Step 2: Create a New Node.js Project: 
 Create a Directory: Make a new directory for your project and navigate into it:
 bash
 Copy code
@@ -23,7 +23,7 @@ Copy code
 npm install express body-parser twilio
 ```
 - Step 3: Create the Webhook Server
-Create a new file called server.js and open it in your text editor. Add the following code to set up a basic Express server that can receive POST requests:
+Create a new file called server.js and open it in your text editor or vs code. Add the following code to set up a basic Express server that can receive POST requests:
 
 javascript code
 
@@ -81,19 +81,32 @@ app.listen(PORT, () => {
 ```
 
 Step 4: Run Your Server
-Start the Server:
 bash
 Copy code
+```
 node server.js
+```
 This server now listens for POST requests at the /webhook endpoint. When a message is received, it logs the message, sends a static reply back to the user through Twilio, and responds to Twilio's webhook request.
 
 Step 5: Expose Your Server to the Internet
 To receive webhook calls from Twilio, your server needs to be publicly accessible. For development purposes, you can use tools like ngrok to expose your local server:
 
 Download and Run ngrok:
+- open up your cli and run this command in your
 bash
-Copy code
-./ngrok http 3000
+```
+npm install dialogflow @google-cloud/dialogflow 
+```
+
+Cd into your twilio directory 
+```
+cd twilio-dialogflow-webhook
+```
+
+- Install ngrok
+```
+brew install ngrok/ngrok/ngrok
+```
 This will provide you with a public URL (e.g., https://xxxxx.ngrok.io).
 Update Twilio Webhook URL: Use this URL in your Twilio console settings for incoming messages, appending /webhook (e.g., https://xxxxx.ngrok.io/webhook).
 This setup forms the basis of your webhook service. The next steps involve integrating actual Dialogflow API calls, which will allow your service to process and respond to messages based on your Dialogflow agent's configurations.
